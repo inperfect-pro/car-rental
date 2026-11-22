@@ -141,6 +141,25 @@ record InChannel(ChannelId channelId) implements ChannelScope {
     }
 ```
 
+#### Enums
+
+Do not use domain enums in DTOs that are passed in adapters, use defensive mapping and explicitly state the possible values via hibernate validator
+constraints.
+
+#### Exceptions
+
+Use checked domain exceptions for domain logic and entities. Declare and propagate them through the application use case. Each input adapter must wrap
+its use-case call in a `try`/`catch` and map the declared failures to that adapter's agreed response structure. Value objects may throw
+`IllegalArgumentException` for invalid values. Input adapters catch it and map it to a client error.
+
+#### Lombok
+
+Use lombok's @RequiredArgsConstructor for components instead of explicit constructors to lower the boilerplate code.
+
+#### Indentation
+
+For continues indentation use 4 spaces not 8
+
 ## SMART test rules
 
 Every test must be **Specific, Meaningful, Autonomous, Repeatable, and Timely**.
